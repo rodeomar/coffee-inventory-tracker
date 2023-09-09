@@ -1,11 +1,17 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Home from './Components/Home';
+import Beans from './Components/Beans';
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="Beans" element={<Beans />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
