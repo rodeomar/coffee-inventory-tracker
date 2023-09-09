@@ -1,14 +1,9 @@
-const sacksData = [
-    {
-        id: 1,
-        typeOfBeans: 'Coffea Arabica',
-        poundsRemaining: 130,
-    },
-    {
-        id: 2,
-        typeOfBeans: 'Coffea Robusta',
-        poundsRemaining: 100,
-    },
-];
+let sacksData = localStorage.getItem("sacksData");
+
+if (sacksData === null) {
+  sacksData = [];
+} else {
+  sacksData = JSON.parse(sacksData);
+}
 
 export default sacksData;
