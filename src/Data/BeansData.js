@@ -1,21 +1,21 @@
 const beansData = [
   {
     id: 1,
-    name: "Arabica",
+    name: "Coffea Arabica",
     origin: "Ethiopia",
     price: 10.99,
     roast: "Medium",
   },
   {
     id: 2,
-    name: "Robusta",
+    name: "Coffea Robusta",
     origin: "Vietnam",
     price: 8.99,
     roast: "Dark",
   },
   {
     id: 3,
-    name: "Colombian",
+    name: "Coffea Colombian",
     origin: "Colombia",
     price: "9.99",
     roast: "Medium",

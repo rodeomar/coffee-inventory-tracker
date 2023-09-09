@@ -12,6 +12,6 @@ code {
     monospace;
 }
 
-tr:hover{
+tr:not(:has(th)):hover {
   background-color: rgb(227, 227, 227);
 }
