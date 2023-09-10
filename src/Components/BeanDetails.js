@@ -113,6 +113,7 @@ function BeanDetails() {
               </div>
               <br />
               Do you want to sell {sellPounds} pound{sellPounds > 1 ? 's' : ''} of coffee beans?
+              <p className='text-danger'>Please Reload this Webpage after adding the Sacks in the different webpage</p>
             </div>
             <div className="modal-footer">
               <button
