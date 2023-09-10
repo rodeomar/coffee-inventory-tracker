@@ -15,10 +15,10 @@ function Beans() {
     }
     return (
         <>
-            <Navbar />
+            <Navbar isBeansActive={true} />
             <div className="container mt-4">
-                <h1>Available Beans</h1>
-                <table className="table">
+                <h1 className='text-light'>Available Beans</h1>
+                <table className="table gradient2Color">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -29,7 +29,7 @@ function Beans() {
                         {filteredBeans.map((bean) => (
                             <tr key={bean.id}>
                                 <td>
-                                    <Link to={`/Beans/${bean.id}`}>{bean.name}</Link>
+                                    {bean.name}
                                 </td>
                                 <td>
                                     <Link to={`/Beans/${bean.id}`} className="btn btn-primary">

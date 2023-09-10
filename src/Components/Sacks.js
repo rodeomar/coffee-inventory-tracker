@@ -48,9 +48,9 @@ function Sacks() {
 
   return (
     <>
-      <Navbar />
-      <div className="container mt-4">
-        <h1>Coffee Sacks</h1>
+      <Navbar isSacksActive={true} />
+      <div className="container mt-4 gradient2Color">
+        <h1 className='text-light'>Coffee Sacks</h1>
         <button
           className="btn btn-primary mb-4"
           data-toggle="modal"

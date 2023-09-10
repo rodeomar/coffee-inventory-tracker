@@ -15,3 +15,44 @@ code {
 tr:not(:has(th)):hover {
   background-color: rgb(227, 227, 227);
 }
+
+body {
+  background: linear-gradient(45deg, #8B4513, #42281c, #83593b, #dc5f25);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.gradient2Color {
+  background: linear-gradient(45deg, #dcab88, #8c7165, #f0c5a7, #bfaba1);
+  background-size: 400% 400%;
+  animation: gradient2 15s both infinite;
+}
+
+@keyframes gradient2 {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+.underlineText{
+  text-decoration: underline;
+
+}

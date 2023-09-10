@@ -52,9 +52,9 @@ function BeanDetails() {
   return (
     <>
       <Navbar />
-      <div className="container mt-4">
-        <h1>Bean Details</h1>
-        <div className="card">
+      <div className="container mt-4 ">
+        <h1 className='text-light'>Bean Details</h1>
+        <div className="card gradient2Color ">
           <div className="card-body">
             <h5 className="card-title">{bean.name}</h5>
             <p className="card-text">Origin: {bean.origin}</p>

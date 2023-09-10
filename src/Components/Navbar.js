@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
 
-function Navbar() {
+function Navbar(props) {
   const history = useNavigate();
 
   const handleSubmit = (e) => {
@@ -14,21 +15,24 @@ function Navbar() {
     }
   };
 
+
+  const beansClass = props.isBeansActive ? 'nav-link text-light underlineText' : 'nav-link text-light';
+  const sacksClass = props.isSacksActive ? 'nav-link text-light underlineText' : 'nav-link text-light';
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="/">Local Coffee Tracker</a>
+      <nav className="navbar navbar-expand-lg navbar-light ">
+        <a className="navbar-brand text-light" href="/">Local Coffee Tracker</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <a className="nav-link" href="/Beans">Beans</a>
+          <li className="nav-item">
+              <a className={beansClass} href="/Beans">Beans</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/Sacks">Coffee Sacks</a>
+              <a className={sacksClass} href="/Sacks">Coffee Sacks</a>
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0" onSubmit={handleSubmit}>
@@ -41,4 +45,13 @@ function Navbar() {
   );
 }
 
+Navbar.propTypes = {
+  isBeansActive: PropTypes.bool,
+  isSacksActive: PropTypes.bool,
+};
+Navbar.defaultProps  = {
+  isBeansActive: false,
+  isSacksActive: false
+  ,
+};
 export default Navbar;
