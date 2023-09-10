@@ -7,31 +7,39 @@ import Navbar from './Navbar';
 function BeanDetails() {
   const { id } = useParams();
   const bean = beansData.find((bean) => bean.id === parseInt(id));
-  const [sellPounds, setSellPounds] = useState(1); 
+  const [sellPounds, setSellPounds] = useState(1);
 
   const sellBean = () => {
     const correspondingSack = sacksData.find((sack) => sack.typeOfBeans === bean.name);
-    
+
     if (correspondingSack === undefined) {
       alert('OUT OF STOCK');
     } else {
       const poundsToSell = parseInt(sellPounds);
       if (poundsToSell <= 0) {
         alert('Please enter a valid number of pounds to sell.');
+        setSellPounds(1);
+
         return;
       }
-      
+
       if (correspondingSack.poundsRemaining < poundsToSell) {
         alert('Not enough pounds in the sack to sell.');
+        setSellPounds(1);
         return;
       }
-      
+
       correspondingSack.poundsRemaining -= poundsToSell;
-      sacksData.forEach((sack, index) => {
-        if (sack.typeOfBeans === correspondingSack.typeOfBeans) {
-          sacksData[index] = correspondingSack;
-        }
-      });
+
+      if (correspondingSack.poundsRemaining === 0) {
+        sacksData.splice(sacksData.indexOf(correspondingSack), 1)
+      } else {
+        sacksData.forEach((sack, index) => {
+          if (sack.typeOfBeans === correspondingSack.typeOfBeans) {
+            sacksData[index] = correspondingSack;
+          }
+        });
+      }
       localStorage.setItem('sacksData', JSON.stringify(sacksData));
       setSellPounds(1);
     }
