@@ -20,18 +20,31 @@ function Sacks() {
 
   const handleAddSack = () => {
     if (newSack.typeOfBeans) {
-      const newSackWithId = {
-        ...newSack,
-        id: sacksData.length + 1,
-      };
-      sacksData.push(newSackWithId);
+      const existingSackIndex = sacksData.findIndex(
+        (sack) => sack.typeOfBeans === newSack.typeOfBeans
+      );
+
+      if (existingSackIndex !== -1) {
+
+        sacksData[existingSackIndex].poundsRemaining += 130;
+      } else {
+
+        const newSackWithId = {
+          ...newSack,
+          id: sacksData.length + 1,
+        };
+        sacksData.push(newSackWithId);
+      }
+
       localStorage.setItem("sacksData", JSON.stringify(sacksData));
+
       setNewSack({
         typeOfBeans: '',
         poundsRemaining: 130,
       });
     }
   };
+
 
   return (
     <>
@@ -105,6 +118,8 @@ function Sacks() {
                       </option>
                     ))}
                   </select>
+                  <p className="text-danger">Adding multiple sacks of the same coffee will increase the pounds in the existing sack.</p>
+
                 </div>
               </form>
             </div>

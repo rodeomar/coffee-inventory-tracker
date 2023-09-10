@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import beansData from '../Data/BeansData';
 import sacksData from '../Data/SacksData';
@@ -7,22 +7,35 @@ import Navbar from './Navbar';
 function BeanDetails() {
   const { id } = useParams();
   const bean = beansData.find((bean) => bean.id === parseInt(id));
+  const [sellPounds, setSellPounds] = useState(1); 
 
   const sellBean = () => {
     const correspondingSack = sacksData.find((sack) => sack.typeOfBeans === bean.name);
-    let idxSack = sacksData.indexOf(correspondingSack);
-    sacksData.splice(correspondingSack, 1)
-    if (correspondingSack === undefined){
-      alert(
-          "OUT OF STOCK"
-      )
-    }else{
-      correspondingSack.poundsRemaining--;
-      sacksData.push(correspondingSack);
-      localStorage.setItem("sacksData", JSON.stringify(sacksData));
+    
+    if (correspondingSack === undefined) {
+      alert('OUT OF STOCK');
+    } else {
+      const poundsToSell = parseInt(sellPounds);
+      if (poundsToSell <= 0) {
+        alert('Please enter a valid number of pounds to sell.');
+        return;
+      }
+      
+      if (correspondingSack.poundsRemaining < poundsToSell) {
+        alert('Not enough pounds in the sack to sell.');
+        return;
+      }
+      
+      correspondingSack.poundsRemaining -= poundsToSell;
+      sacksData.forEach((sack, index) => {
+        if (sack.typeOfBeans === correspondingSack.typeOfBeans) {
+          sacksData[index] = correspondingSack;
+        }
+      });
+      localStorage.setItem('sacksData', JSON.stringify(sacksData));
+      setSellPounds(1);
     }
-
-  }
+  };
 
   if (!bean) {
     return <div>Bean not found</div>;
@@ -41,7 +54,7 @@ function BeanDetails() {
             <p className="card-text">Roast: {bean.roast}</p>
 
             <button
-              className="btn btn-primary  mx-2"
+              className="btn btn-primary mx-2"
               data-toggle="modal"
               data-target="#sellBeanModal"
             >
@@ -79,7 +92,19 @@ function BeanDetails() {
               </button>
             </div>
             <div className="modal-body">
-              Do you want to sell a pound of coffee beans?
+              <div>
+                <label htmlFor="sellPounds">Pounds to Sell:</label>
+                <input
+                  type="number"
+                  id="sellPounds"
+                  name="sellPounds"
+                  min="1"
+                  value={sellPounds}
+                  onChange={(e) => setSellPounds(e.target.value)}
+                />
+              </div>
+              <br />
+              Do you want to sell {sellPounds} pound{sellPounds > 1 ? 's' : ''} of coffee beans?
             </div>
             <div className="modal-footer">
               <button
@@ -101,7 +126,6 @@ function BeanDetails() {
           </div>
         </div>
       </div>
-      
     </>
   );
 }
