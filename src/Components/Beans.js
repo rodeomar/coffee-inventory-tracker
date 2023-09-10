@@ -1,10 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import beansData from '../Data/BeansData';
 import Navbar from './Navbar';
 
 
 function Beans() {
+    const [searchParams] = useSearchParams();
+    const name = searchParams.get('name');
+    let filteredBeans = beansData;
+    if (name !== null) {
+        filteredBeans = filteredBeans.filter((bean) => {
+            return bean.name.toLowerCase().includes(name.toLowerCase());
+        });
+    }
     return (
         <>
             <Navbar />
@@ -18,7 +26,7 @@ function Beans() {
                         </tr>
                     </thead>
                     <tbody>
-                        {beansData.map((bean) => (
+                        {filteredBeans.map((bean) => (
                             <tr key={bean.id}>
                                 <td>
                                     <Link to={`/Beans/${bean.id}`}>{bean.name}</Link>

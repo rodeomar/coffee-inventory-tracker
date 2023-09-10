@@ -1,6 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
+  const history = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const searchInput = document.getElementById('searchInput');
+    const searchValue = searchInput.value;
+
+    if (searchValue) {
+      history(`/Beans?name=${encodeURIComponent(searchValue)}`);
+    }
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +31,7 @@ function Navbar() {
               <a className="nav-link" href="/Sacks">Coffee Sacks</a>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
+          <form className="form-inline my-2 my-lg-0" onSubmit={handleSubmit}>
             <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput" />
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
