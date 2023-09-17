@@ -10,6 +10,10 @@ Coffee Inventory Management System is a web application that allows users to man
 - [Technologies Used](#technologies-used)
 - [Know Bugs](#know-bugs)
 
+## Plan
+![Plan](https://github.com/rodeomar/coffee-inventory-tracker/assets/120299308/ce8842b2-92b8-4f8f-8b6f-aabdb66fb21c)
+
+
 ## Features
 
 - View a list of coffee sacks with details.
